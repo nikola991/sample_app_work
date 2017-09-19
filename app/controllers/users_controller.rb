@@ -47,7 +47,7 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
 
-  def logged_in_user
+  def logged_in_user  # ako ne si logiran ti vika, logiraj se pred da te nasocam na taa funkcionalnost, ako si logiran ok, ne pravam nisto prodolzi
     unless logged_in?
       store_location
       flash[:danger] = "Please log in."
@@ -57,7 +57,7 @@ class UsersController < ApplicationController
 
   def correct_user
     @user = User.find(params[:id])
-    redirect_to(root_url) unless current_user?(@user) #dokolku @user != od current user od session helper redirect
+    redirect_to(root_url) unless current_user?(@user) #dokolku @user != od current user? od session helper redirect
   end
   def admin_user
     redirect_to(root_url) unless current_user.admin?
